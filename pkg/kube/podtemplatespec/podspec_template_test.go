@@ -104,7 +104,7 @@ func TestPodTemplateSpec_MultipleEditsToContainer(t *testing.T) {
 			)),
 		WithContainerByIndex(0,
 			container.Apply(
-				container.WithImagePullPolicy(corev1.PullAlways),
+				container.WithImagePullPolicy(corev1.PullIfNotPresent),
 			)),
 		WithContainer("container-0", container.Apply(
 			container.WithCommand([]string{"cmd"}),

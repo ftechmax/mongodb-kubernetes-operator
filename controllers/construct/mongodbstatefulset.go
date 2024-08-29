@@ -280,7 +280,7 @@ func mongodbAgentContainer(automationConfigSecretName string, volumeMounts []cor
 	return container.Apply(
 		container.WithName(AgentName),
 		container.WithImage(agentImage),
-		container.WithImagePullPolicy(corev1.PullAlways),
+		container.WithImagePullPolicy(corev1.PullIfNotPresent),
 		container.WithReadinessProbe(DefaultReadiness()),
 		container.WithResourceRequirements(resourcerequirements.Defaults()),
 		container.WithVolumeMounts(volumeMounts),
@@ -319,7 +319,7 @@ func versionUpgradeHookInit(volumeMount []corev1.VolumeMount) container.Modifica
 		container.WithCommand([]string{"cp", "version-upgrade-hook", "/hooks/version-upgrade"}),
 		container.WithImage(os.Getenv(VersionUpgradeHookImageEnv)),
 		container.WithResourceRequirements(resourcerequirements.Defaults()),
-		container.WithImagePullPolicy(corev1.PullAlways),
+		container.WithImagePullPolicy(corev1.PullIfNotPresent),
 		container.WithVolumeMounts(volumeMount),
 		containerSecurityContext,
 	)
@@ -357,7 +357,7 @@ func readinessProbeInit(volumeMount []corev1.VolumeMount) container.Modification
 		container.WithName(ReadinessProbeContainerName),
 		container.WithCommand([]string{"cp", "/probes/readinessprobe", "/opt/scripts/readinessprobe"}),
 		container.WithImage(os.Getenv(ReadinessProbeImageEnv)),
-		container.WithImagePullPolicy(corev1.PullAlways),
+		container.WithImagePullPolicy(corev1.PullIfNotPresent),
 		container.WithVolumeMounts(volumeMount),
 		container.WithResourceRequirements(resourcerequirements.Defaults()),
 		containerSecurityContext,

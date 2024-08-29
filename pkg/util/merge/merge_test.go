@@ -118,7 +118,7 @@ func TestMergeContainer(t *testing.T) {
 		container.WithName("default-container"),
 		container.WithCommand([]string{"a", "b", "c"}),
 		container.WithImage("default-image"),
-		container.WithImagePullPolicy(corev1.PullAlways),
+		container.WithImagePullPolicy(corev1.PullIfNotPresent),
 		container.WithWorkDir("default-work-dir"),
 		container.WithArgs([]string{"arg0", "arg1"}),
 		container.WithLivenessProbe(probes.Apply(
